@@ -49,4 +49,17 @@ public class BasicCalculatorTest {
                 () -> first + " * " + second + " should equal " + expectedResult);
     }
 
+    @DisplayName("Testing several divs")
+    @ParameterizedTest(name = "{6} / {2} = {3}")
+    @CsvSource({
+            "10,     10,      1",
+            "-10,   -2,      5",
+            "25,     5,      5",
+            "9,     3,     3"
+    })
+    public void severalDiv(Long first, Long second, Long expectedResult) {
+        assertEquals(expectedResult, basicCalculator.div(first, second),
+                () -> first + " / " + second + " should equal " + expectedResult);
+    }
+
 }

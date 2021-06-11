@@ -23,6 +23,9 @@ public class BasicCalculator {
     }
 
     public Long div(Long number1, Long number2) {
+        if(number2==0){
+            throw new RuntimeException("It's not possible to divide any number by zero");
+        }
         logger.info( "Dividing {} / {}", number1, number2 );
         return number1 / number2;
     }
