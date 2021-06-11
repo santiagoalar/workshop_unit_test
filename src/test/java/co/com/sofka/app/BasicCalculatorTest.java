@@ -1,5 +1,6 @@
 package co.com.sofka.app;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -60,6 +61,19 @@ public class BasicCalculatorTest {
     public void severalDiv(Long first, Long second, Long expectedResult) {
         assertEquals(expectedResult, basicCalculator.div(first, second),
                 () -> first + " / " + second + " should equal " + expectedResult);
+    }
+
+    @DisplayName("Testing dividing by zero")
+    @ParameterizedTest(name = "{6} / {0} = Error")
+    @CsvSource({
+            "4,     0",
+            "10,    0"
+    })
+    public void DividingByZero(Long first, Long second) {
+        var response = Assertions.assertThrows(RuntimeException.class, ()->{
+            Long result = basicCalculator.div(first, second);
+        });
+        Assertions.assertEquals("It's not possible to divide any number by zero", response.getMessage());
     }
 
 }
